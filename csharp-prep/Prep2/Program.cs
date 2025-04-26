@@ -8,61 +8,9 @@ class Program
         Console.Write("Please enter your grade percentange: ");
         string userInput = Console.ReadLine();
         int gradePencentage = int.Parse(userInput);
+
         int mod = gradePencentage % 10;
-
-        /* 
-        if (gradePencentage >= 90)
-        {
-            string letterGrade = "A";
-            Console.WriteLine($"Your letter grade for {gradePencentage}% is {letterGrade}");
-        }
-        else if (gradePencentage >= 80)
-        {
-            string letterGrade = "B";
-            Console.WriteLine($"Your letter grade for {gradePencentage}% is {letterGrade}");
-        }
-        else if (gradePencentage >= 70)
-        {
-            string letterGrade = "C";
-            Console.WriteLine($"Your letter grade for {gradePencentage}% is {letterGrade}");
-        }
-        else if (gradePencentage >= 60)
-        {
-            string letterGrade = "D";
-            Console.WriteLine($"Your letter grade for {gradePencentage}% is {letterGrade}");
-        }
-        else
-        {
-            string letterGrade = "F";
-            Console.WriteLine($"Your letter grade for {gradePencentage}% is {letterGrade}");
-        }
-
-        if (gradePencentage >= 70)
-        {
-            Console.WriteLine("Congratulations, you passed the course!");
-        }
-        else
-        {
-            Console.WriteLine("You did not passed the course this time. Ensure to register it now so you can learn more.");
-        }  */
-
-        /// Extra #1
-        string gradeSign;
-
-        if (mod >= 7)
-        {
-            gradeSign = "+";
-        }
-        else if (mod < 3)
-        {
-            gradeSign = "-";
-        }
-        else
-        {
-            gradeSign = "";
-        }
         
-        /// Core
         string letter;
 
         if (gradePencentage >= 90)
@@ -85,6 +33,21 @@ class Program
         {
             letter = "F";
         }
+
+        string gradeSign; // Stretch #1
+
+        if (mod >= 7 && !(letter == "A" || letter == "F")) // Stretch #2 & #3
+        {
+            gradeSign = "+";
+        }
+        else if (mod < 3 && !(letter == "F"))
+        {
+            gradeSign = "-";
+        }
+        else
+        {
+            gradeSign = "";
+        }        
 
         string letterGradeSign = letter + gradeSign;
 
