@@ -1,4 +1,5 @@
 using System;
+using System.Security.Cryptography;
 
 class Program
 {
@@ -7,6 +8,7 @@ class Program
         Console.Write("Please enter your grade percentange: ");
         string userInput = Console.ReadLine();
         int gradePencentage = int.Parse(userInput);
+        int mod = gradePencentage % 10;
 
         /* 
         if (gradePencentage >= 90)
@@ -43,7 +45,24 @@ class Program
         {
             Console.WriteLine("You did not passed the course this time. Ensure to register it now so you can learn more.");
         }  */
+
+        /// Extra #1
+        string gradeSign;
+
+        if (mod >= 7)
+        {
+            gradeSign = "+";
+        }
+        else if (mod < 3)
+        {
+            gradeSign = "-";
+        }
+        else
+        {
+            gradeSign = "";
+        }
         
+        /// Core
         string letter;
 
         if (gradePencentage >= 90)
@@ -67,15 +86,16 @@ class Program
             letter = "F";
         }
 
+        string letterGradeSign = letter + gradeSign;
+
         if (gradePencentage >= 70)
         {
-            Console.WriteLine($"Congratulations, you passed the course with letter grade {letter}!");
+            Console.WriteLine($"Congratulations, you passed the course with letter grade {letterGradeSign}!");
         }
         else
         {
-            Console.WriteLine($"Your letter grade is {letter}. Please retake the course to learn more.");
+            Console.WriteLine($"Your letter grade is {letterGradeSign}. Please retake the course to learn more.");
         }
-
     }
 }
 
