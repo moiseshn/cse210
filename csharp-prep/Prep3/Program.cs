@@ -13,6 +13,7 @@ class Program
         magicNumber = randomGenerator.Next(1,100);
 
         Console.WriteLine("The computer has picked a number from 1 to 100");
+        // Console.WriteLine($"PC number is: {magicNumber}... shhhhh");
 
         // Console.Write("What is the magic number? ");
             // string userInput1 = Console.ReadLine();
@@ -23,8 +24,6 @@ class Program
             Console.Write("What is your guess? ");
             string userInput2 = Console.ReadLine();
             guessNumber = int.Parse(userInput2);
-
-
 
             if (guessNumber < magicNumber)
             {
