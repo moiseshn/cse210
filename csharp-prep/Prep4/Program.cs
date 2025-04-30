@@ -64,9 +64,9 @@ Work through these core requirements step-by-step to complete the program.
     The largest number is: 48
   
 Stretch Challenge
-Have the user enter both positive and negative numbers, then find the smallest 
+1. Have the user enter both positive and negative numbers, then find the smallest 
     positive number (the positive number that is closest to zero).
-    Sort the numbers in the list and display the new, sorted list. 
+2. Sort the numbers in the list and display the new, sorted list. 
     Hint: There are C# libraries that can help you here, try searching the internet for them.
 
     The following shows the expected output after completing the stretch challenges:
