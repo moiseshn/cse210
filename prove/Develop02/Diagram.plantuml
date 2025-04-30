@@ -1,0 +1,8 @@
+@startuml Develop 02
+actor "User" as U #Blue
+participant "First process" as P1
+
+U -> P1 : First step
+P1 -[#Gray]-> U: Feedback
+
+@enduml

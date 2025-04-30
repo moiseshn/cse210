@@ -6,8 +6,8 @@ class Program
     static void Main(string[] args)
     {
         DisplayWelcome();
-        string name = PromptUserName("name");
-        int number = PromptUserNumber(0);
+        string name = PromptUserName();
+        int number = PromptUserNumber();
         int squared = SquareNumber(number);
         DisplayResult(name,squared);
     }
@@ -16,18 +16,18 @@ class Program
         Console.WriteLine("Welcome to the Program!");
     }
 
-    static string PromptUserName(string userName)
+    static string PromptUserName()
     {
         Console.Write("Please enter your name: ");
-        userName = Console.ReadLine();
+        string userName = Console.ReadLine();
         return userName;
     }
 
-    static int PromptUserNumber(int userNumber)
+    static int PromptUserNumber()
     {
         Console.Write("Please enter your favorite number: ");
         string userInputNumber = Console.ReadLine();
-        userNumber = int.Parse(userInputNumber);
+        int userNumber = int.Parse(userInputNumber);
         return userNumber;
     }
 

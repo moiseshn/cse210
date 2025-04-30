@@ -4,41 +4,53 @@ using System.Security.Cryptography;
 
 class Program
 {
+    static string oneMore = "yes";   // Extra #2
     static void Main(string[] args)
-    {
-        int guessNumber = 0;
-        int magicNumber = 0;
-
-        Random randomGenerator = new Random();
-        magicNumber = randomGenerator.Next(1,100);
-
-        Console.WriteLine("The computer has picked a number from 1 to 100");
-        // Console.WriteLine($"PC number is: {magicNumber}... shhhhh");
-
-        // Console.Write("What is the magic number? ");
-            // string userInput1 = Console.ReadLine();
-            // magicNumber = int.Parse(userInput1);
-
-        do
+    { 
+        while (oneMore == "yes")   // Extra #2
         {
-            Console.Write("What is your guess? ");
-            string userInput2 = Console.ReadLine();
-            guessNumber = int.Parse(userInput2);
+            int guessNumber = 0;
+            int magicNumber = 0;
+            int count = 0;  // Extra #1
 
-            if (guessNumber < magicNumber)
-            {
-                Console.WriteLine("Higher");
-            }
-            else if (guessNumber > magicNumber)
-            {
-                Console.WriteLine("Lower");
-            }
-            else
-            {
-                Console.WriteLine("You guessed it!");
-            }
-        } while (guessNumber != magicNumber);
+            Random randomGenerator = new Random();
+            magicNumber = randomGenerator.Next(1,100);
 
+            Console.WriteLine("The computer has picked a number from 1 to 100");
+            // Console.WriteLine($"PC number is: {magicNumber}... shhhhh");
+            // Console.Write("What is the magic number? ");
+                // string userInput1 = Console.ReadLine();
+                // magicNumber = int.Parse(userInput1);
+
+            do
+            {
+                Console.Write("What is your guess? ");
+                string userInput2 = Console.ReadLine();
+                guessNumber = int.Parse(userInput2);
+                count += 1;  // Extra #1
+
+                if (guessNumber < magicNumber)
+                {
+                    Console.WriteLine("Higher");
+                }
+                else if (guessNumber > magicNumber)
+                {
+                    Console.WriteLine("Lower");
+                }
+                else
+                {
+                    Console.WriteLine($"You guessed it with {count} attempts!");  // Extra #1
+                }
+            } while (guessNumber != magicNumber);
+            
+            Console.Write("To keep playing type \"yes\": ");  // Extra #2
+            oneMore = Console.ReadLine();
+            
+            if (oneMore != "yes")
+            {
+                break;
+            }
+        }
     }
 }
 
