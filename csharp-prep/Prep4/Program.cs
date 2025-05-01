@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
 
 class Program
 {
@@ -21,16 +22,29 @@ class Program
                 numbers.Add(newInput);
             }
 
+
+
         } while (newInput != 0);
 
         int sumNum = numbers.Sum();
         double avgNum = numbers.Average();
         int maxNum = numbers.Max();
+
+        List<int> posNum = [.. numbers];
+        posNum.RemoveAll(x => x < 0);
+        int minPosNum = posNum.Min();
         
         // Console.WriteLine($"The count is: {numbers.Count}");
         Console.WriteLine($"The sum is: {sumNum}");
         Console.WriteLine($"The average is: {avgNum}");
         Console.WriteLine($"The largest number is: {maxNum}");
+        Console.WriteLine($"The smallest positive number is: {minPosNum}");
+        Console.WriteLine("The sorted list is: ");
+        numbers.Sort();
+        for (int i = 0; i < numbers.Count; i++)
+        {
+            Console.WriteLine(numbers[i]);
+        }
     }
 }
 
@@ -94,5 +108,4 @@ Stretch Challenge
         3
         5
         7
-
 */
