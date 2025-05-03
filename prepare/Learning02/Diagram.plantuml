@@ -1,4 +1,4 @@
-@startuml
+@startuml LinkedIn Resume
 class Job {
   - _company : string
   - _jobTitle : string
