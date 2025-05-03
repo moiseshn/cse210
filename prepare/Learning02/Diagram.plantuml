@@ -1,0 +1,21 @@
+@startuml
+class Job {
+  - _company : string
+  - _jobTitle : string
+  - _startYear  : int
+  - _endYear    : int
+
+  + Display()   : void
+}
+
+class Resume {
+    - _name :   string
+    - _jobs :   List<Job>
+    + Display() : void
+}
+Job }-[#blue]-|> Resume
+
+note right of Job
+	format "Job Title (Company) StartYear-EndYear",
+end note
+@enduml
