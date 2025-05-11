@@ -1,8 +1,121 @@
-@startuml Develop 02
-actor "User" as U #Blue
-participant "First process" as P1
+@startuml Journal App
 
-U -> P1 : First step
-P1 -[#Gray]-> U: Feedback
+class Main {
+  + optionNumber  : int
+  + journalEntry  : string
+}
+note top of Main
+  1. Calls the <b>Prompt</b> class and stores into a new variable the desired prompts to use randomly.
+  2. Calls the <b>Menu</b> class and stores into a new variable the 5 options of the Journal App.
+  3. Calls the <b>Entry</b> class to create a new variarible where the entries will be stored.
+  4. A <b>While()</b> loop will display the Menu every time the user selects an option from 1 to 4.
+    - Asks the user to enter a number.
+    - Stores and parses the input into a variable.
+    - Runs an IF ELSE Statement to handle each option of the Menu:
+      1. Write:
+        - Calls the RandomPrompt() method from <b>Prompt</b> class.
+        - Lets the user write an entry.
+        - Gets the current date.
+        - Stores to <b>Entry</b>'s List withe the <b>.Add</b> method (date, prompt and entry).
+      2. Display:
+        - Shows the entries stored in the <b>Entry</b>'s List by calling the <b>DisplayEntries()</b> method.
+      3. Load:
+        - Asks the user to enter the filename to be loaded.
+        - Saves the filename to a variable to pass it as a parameter.
+        - An empty List is created to be filled by calling the <b>ReadFromFile()</b> method from the <b>Load()</b> class.
+        - A <b>foreach()</b> loop is used to display the loaded file.
+      4. Save:
+        - Asks the user to enter the filename to be save with.
+        - Saves the filename to a variable to pass it as a parameter.
+        - Calls the <b>SaveToFile()</b> method from the <b>Save()</b> class, to save the entries.
+      5. Quits:
+        - The <b>While</b> loop's condition closes the program.
+        - An ELSE statement shows an error if none of the established's numbers is entered.
+end note
+
++class Prompt {
+  + _prompts        : List<string>
+  + _pickedPrompt   : string
+  + RandomPrompt()  : void
+}
+note bottom of Prompt
+  Uses a <b>List<></b> to keep it 
+  as a template and be filled from 
+  <b>Main()</b> with the <b>.Add</b> method.
+  ie:
+  1. Write about someone you interacted with today!
+  2. Any challenge today to write about?
+  3. What would you have done differently today?
+  4. What was today's highlight?
+  5. What could have been a spitual esence this day?
+
+  _pickedPrompt will be used to store the prompt
+  andsave it with the journal entry info.
+
+  The <b>Random()</b> function picks one prompt 
+  from the list and writes it to the Console.
+end note
+
++class Menu {
+  + _options    : List<string>
+  + ShowMenu()  : void
+}
+note bottom of Menu
+  Uses a <b>List<></b> of options in the 
+  Journal App. In <b>Main()</b> we add the 
+  options with the <b>.Add</b> method:
+  1. Write
+  2. Display
+  3. Load
+  4. Save
+  5. Quit
+  
+  The method runs a <b>foreach()</b> loop 
+  to display the content of the list.
+end note
+
++class Entry {
+  + _entries          : List<string>
+  + DisplayEntries()  : void
+}
+note bottom of Entry
+  Uses a <b>List<></b> to store the 
+  user's journal entries with 
+  the <b>.Add</b> method.
+  
+  The method runs a <b>foreach()</b> 
+  loop to display the entries 
+  entered by the user.
+end note
+
+class Load {
+  + ReadFromFile()  : List<string>
+}
+note bottom of Load
+  Requires a filename from the user as
+  a parameter.
+  
+  The method uses <b>ReadAllLines()</b> 
+  to read the entries by line. A <b>foreach()</b>
+  loop is used to iterate the content.
+end note
+
+class Save {
+  + SaveToFile()  : void
+}
+note bottom of Save
+  Requires two parameters: a filename from 
+  the user, and a list of entries.
+  
+  The method uses the <b>StreamWriter()</b> 
+  function to output the entries. A <b>foreach()</b> 
+  is used to iterate the entries for the output.
+end note
+
+Main <-- Prompt
+Main <-- Menu
+Main <-- Entry
+Main <-- Save
+Main <-- Load
 
 @enduml
