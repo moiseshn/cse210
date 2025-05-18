@@ -3,14 +3,15 @@ using System.Collections.Generic;
 public class Prompt
 {
     public List<string> _prompts = new List<string>();
-    public string _pickedPrompt;
-    public void RandomPrompt(List<string> _prompts)
+    public string _pickedPrompt;  // Tried and failed to fetch a generated prompt globally.
+    public string RandomPrompt(List<string> _prompts) // Changed from void to return _pickedPrompt
     {
         Random randomPrompt = new Random();
         int indexNumber = randomPrompt.Next(_prompts.Count);
         // Added this line to save the random pick to a string variable.
         _pickedPrompt = _prompts[indexNumber];
-        Console.WriteLine(_pickedPrompt);
+        // Console.WriteLine(_pickedPrompt); // Not needed *******************
+        return _pickedPrompt; 
     }
 }
 

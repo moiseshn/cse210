@@ -3,7 +3,7 @@ using System.IO;
 
 public class Load
 {
-    public List<string> ReadFromFile(string filename)
+    public List<string> ReadFromFile(string filename) // return a formated string foreach line ????????????????
     {
         Console.WriteLine("Loading from file... ");
         Console.WriteLine("Here are the loaded entries:\n");

@@ -4,7 +4,7 @@ using System.IO;
 public class Save
 {
     // Method requires two parameters: user input filename, a list of entries
-    public void SaveToFile(string filename, List<string> entries)
+    public void SaveToFile(string filename, List<string> entries) 
     {
         Console.WriteLine("Saving to file... ");
         using (StreamWriter outputFile = new StreamWriter(filename))

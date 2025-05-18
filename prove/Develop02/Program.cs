@@ -1,34 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Runtime.CompilerServices;
 
-///////////////////////// AGENDA ///////////////////////////
 /*
-1. Remind meeting's time, location and lead student.
-2. Prayer by next week's lead student.
-3. Before code review: Explain the parts that you have finished 
-    and the parts that you are still working on.
-4. Code review: 
-    - Begin by showing parts of the program that are complete 
-        (or nearly complete). Talk about what you were trying to 
-        accomplish and why you selected the approach you did.
-    - Others can share suggestions, ask questions and share screen.
-    - Share parts of the program that are not complete yet, or 
-        discuss areas that you have not worked on.
-    - Others share potential solutions, ask questions, share screen.
-5. Conclude: Set next week's lead student and submit participation.
-
 ************** LESSONS LEARNED ***********************************
 1. Separated Load and Save Classes from Entry.cs to their own file.
 2. Changed Classes from void to List. Error "void to string" when assinging a variable.
-3. 
+3. Using a bool for quitting the program and nest a second IF statement for Menu inputs.
+4. Saving the generated prompt by changing from void to string the method.
+5. Added a Try Catch to handle string format exceptions.
+6. Added a Method to get the user's IP Address. Extra #2
 
 ****************** PENDING ***************************************
-1. Program quits if out of range number is entered. It should return to menu.
-2. Prompt selected is not getting stored.
-3. Saving with delimeter in csv formating.
-
+- Saving with delimeter in csv formating. Extra #3
 */
 
 class Program
@@ -62,67 +48,84 @@ class Program
         Save mySaves = new Save();
         
         // Global variables to be used in While Loop Menu & IF Statements
-        int optionNumber = 1;
-        string pickedPrompt = myPrompts._pickedPrompt;
+        //int optionNumber = 1; *** Not used anymore in this scope.
+        string pickedPrompt; // Not saving generated prompt ************
         string userAnswer;
         
         // Display Menu recurrently based on IF statements
-        while (optionNumber >= 1 && optionNumber <=4)
+        // while (optionNumber >= 1 && optionNumber <=4) *** breaks the loop if errors
+        try
         {
-            myMenu.ShowMenu();
-            Console.Write("Enter the number of your choice: ");
-            string userInput = Console.ReadLine();
-            optionNumber = int.Parse(userInput);
+            bool quit = false;
+            while (quit == false)
+            {
+                myMenu.ShowMenu();
+                Console.Write("\nEnter the number of your choice: ");
+                string userInput = Console.ReadLine();
+                int optionNumber = int.Parse(userInput);
 
-            if (optionNumber == 1) // Prompt and Entry
-            {
-                // Calls the Prompt Generator and saves the result in pickedPrompt
-                myPrompts.RandomPrompt(myPrompts._prompts); // It's not storing it to the entry **************
-                // Indicator for the user to write something
-                Console.Write("> ");
-                // Save the user input in a variable
-                userAnswer = Console.ReadLine();
-                // Generates and saves the Date of the entry
-                DateTime theCurrentTime = DateTime.Now;
-                string dateText = theCurrentTime.ToShortDateString();
-                // Stores the date, prompt and answer
-                myEntries._entries.Add($"Date: {dateText}\nPrompt: {pickedPrompt}\nEntry: {userAnswer}\n");
-            }
-            else if (optionNumber == 2) // Display
-            {
-                Console.WriteLine($"Your entries are: ");
-                myEntries.DisplayEntries();
-            }
-            else if (optionNumber == 3) // Load
-            {
-                // Asks the user to type the name of the file to be retrieved.
-                Console.Write("Type your filename to load: ");
-                string userFileToLoad = Console.ReadLine();
-                // Saves the filename to a variable to pass it as a parameter.
-                List<string> pastEntries = myLoads.ReadFromFile(userFileToLoad);
-                // Display the entries of the loaded file
-                foreach (string x in pastEntries)
+                
+                if (optionNumber >= 1 && optionNumber <=5)
                 {
-                    Console.WriteLine(x); // We could add the Save output formating for each part (video example) *****
-                    // Console.WriteLine($"Date: {x.Date}\nPrompt: {x.Prompt}\nEntry: {x.Answer}");
+                    if (optionNumber == 1) // Prompt and Entry
+                    {
+                        // Calls the Prompt Generator and saves the result in pickedPrompt
+                        pickedPrompt = myPrompts.RandomPrompt(myPrompts._prompts); // Changed Method to string to save it.
+                        Console.WriteLine(pickedPrompt);
+                        // Indicator for the user to write something
+                        Console.Write("> ");
+                        // Save the user input in a variable
+                        userAnswer = Console.ReadLine();
+                        // Generates and saves the Date of the entry
+                        DateTime theCurrentTime = DateTime.Now;
+                        string dateText = theCurrentTime.ToShortDateString();
+
+                        // Store IP Addresses
+                        string myIp = myEntries.GetIPAddress();
+                        // Stores the date, prompt and answer
+                        myEntries._entries.Add($"Date: {dateText}, Prompt: {pickedPrompt}, Entry: {userAnswer}, IP Address: {myIp}");
+                    }
+                    else if (optionNumber == 2) // Display
+                    {
+                        Console.WriteLine($"\nYour entries are: ");
+                        myEntries.DisplayEntries();
+                    }
+                    else if (optionNumber == 3) // Load
+                    {
+                        // Asks the user to type the name of the file to be retrieved.
+                        Console.WriteLine("\nType your filename to load: ");
+                        string userFileToLoad = Console.ReadLine();
+                        // Saves the filename to a variable to pass it as a parameter.
+                        List<string> pastEntries = myLoads.ReadFromFile(userFileToLoad);
+                        // Display the entries of the loaded file
+                        Console.WriteLine(pastEntries);
+                    }
+                    else if (optionNumber == 4) // Save
+                    {
+                        // Asks the user to type the name of the file to be saved with.
+                        Console.WriteLine("\nType the filename to save: ");
+                        // Saves the filename to a variable to pass it as a parameter.
+                        string userFileToSave = Console.ReadLine();
+                        // Calls the method with two parameters: filename, entries.
+                        mySaves.SaveToFile(userFileToSave, myEntries._entries);
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nCan't wait to see your next entry!\n");
+                        quit = true;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("\nSorry, that's not an option."); // Exception if input is a string. *******
+                    quit = false;
                 }
             }
-            else if (optionNumber == 4) // Save
-            {
-                // Asks the user to type the name of the file to be saved with.
-                Console.WriteLine("Type the filename to save: ");
-                // Saves the filename to a variable to pass it as a parameter.
-                string userFileToSave = Console.ReadLine();
-                // Calls the method with two parameters: filename, entries.
-                mySaves.SaveToFile(userFileToSave,myEntries._entries);
-            }
-            else if (optionNumber == 5) // Quit ****** else if >5 || <1 error, else by message **************
-            {
-                Console.WriteLine("Can't wait to see your next entry! \n");
-            }
-            else{
-                Console.WriteLine("Sorry, that's not an option"); // program quits instead of showing the menu.
-            }
+        }
+        catch (Exception)
+        {
+            Console.WriteLine("\nFormat Exception. Only whole numbers are allowed.");
+
         }
     }
 }
@@ -193,8 +196,8 @@ exceed these requirements.
 Here are some ideas you might consider:
 - Think of other problems that keep people from writing in their 
     journal and address one of those.
-- Save other information in the journal entry.
-- Improve the process of saving and loading to save as a .csv file that 
+- Save other information in the journal entry. <<<<<<<< Computer System or GPS location ????????????????????
+- Improve the process of saving and loading to save as a .csv file that ****** Work in progress ***********
     could be opened in Excel (make sure to account for quotation marks 
     and commas correctly in your content.
 - Save or load your document to a database or use a different library 
