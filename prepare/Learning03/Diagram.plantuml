@@ -1,0 +1,39 @@
+@startuml Fraction Calc
+
++class Program {
+  + Main()  : void
+}
+
++class Fraction {
+  - _top     : int
+  - _bottom  : int
+  + Fraction()
+  + Fraction(wholeNumber : int)
+  + Fraction(top : int, bottom : int)
+
+/'   
+  - GetTop()
+  - SetTop(top : int)
+
+  - GetBottom()
+  - SetBottom(bottom : int) 
+  '/
+
+  + GetFractionString() : string
+  + GetDecimalValue()   : double
+}
+note bottom of Fraction
+  Using contructors to cover each 
+  scenario. Setting private attributes 
+  and public methods to control access.
+end note
+
+note left of Fraction::Fraction
+  No parameters = 1/1.
+  Only numerator = top/1.
+  Two parameters =top/bottom.
+end note
+
+Program <-- Fraction
+
+@enduml

@@ -1,10 +1,10 @@
 @startuml Journal App
 
-class Main {
-  + optionNumber  : int
-  + journalEntry  : string
++class Program {
+  + Main()  : void
 }
-note top of Main
+
+note top of Program
   1. Calls the <b>Prompt</b> class and stores into a new variable the desired prompts to use randomly.
   2. Calls the <b>Menu</b> class and stores into a new variable the 5 options of the Journal App.
   3. Calls the <b>Entry</b> class to create a new variarible where the entries will be stored.
@@ -112,10 +112,42 @@ note bottom of Save
   is used to iterate the entries for the output.
 end note
 
-Main <-- Prompt
-Main <-- Menu
-Main <-- Entry
-Main <-- Save
-Main <-- Load
+Program <-- Prompt
+Program <-- Menu
+Program <-- Entry
+Program <-- Save
+Program <-- Load
 
 @enduml
+
+/' 
+***** Classes
+While you have a Main class, you don't indicate a Main method, 
+which is in the Program class. In other words, you should have 
+included the Program class since it will be part of your program. 
+
+***** Journal Behavios (ok)
+Some of the behaviors that could otherwise be include in a Journal 
+class have been included. However, not having the Journal class makes 
+it so you cannot deal with a Journal as an object.
+
+***** Jounal Attributes
+Similarly to above, some of the journal attributes are included in 
+the design, but they are not incorporated within a Journal class as a 
+cohesive unit containing all of the appropriate behaviors and attributes.
+
+***** Entry Attributes
+What if you wanted to display just the dates that entries were added 
+to the journal? How would you do that? By not having an Entry class that 
+has attributes specific to a single journal entry, you make it harder to 
+deal with each data type. Granted, that may not be necessary for this 
+tiny program. But being in the habit of creating classes with attributes 
+and behaviors appropriate for a single specific object really simplifies 
+things when the program starts to get more complex.
+
+**** Saving/Loading (ok)
+It would be perfectly okay to have a single class to handle both saving 
+and loading. Or it could be included in the Program class (which is where 
+the Main method should be)
+
+'/
