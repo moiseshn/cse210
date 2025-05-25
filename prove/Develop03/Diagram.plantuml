@@ -1,0 +1,81 @@
+@startuml Scripture Memorizer
+
++class Program {
+  + Main()  : void
+}
+ 
++class Scripture {
+' Attributes / Member variables
+  - _reference  : string
+  - _text      : string
+
+' Constructors / Parameters
+  + Scripture(reference : string, text : string)
+    ' split text to list
+
+' Behaviors / Methods / Functions
+  + GetRenderedText()  : string
+    ' Include a Clear & Display actions
+  + HideWords()         : string
+  + IsAllHidden()       : bool
+}
+note bottom of Scripture
+  Keeps track of the reference 
+  and the text of the scripture. 
+  Can hide words and get the 
+  rendered display of the text.
+end note
+
++class Reference {
+' Attributes
+  - _book       : string
+  - _chapter    : int
+  - _verse      : int
+  - _endVerse   : int
+
+' Constructors
+  + Reference(bookName : string, chapterNum : int, verseNum : int)
+  + Reference(bookName : string, chapterNum : int, verseNum : int, lastVerse : int)
+
+' Behaviors
+  + GetReferenceText()  : string
+}
+note bottom of Reference
+  Keeps track of the 
+  book, chapter, and 
+  verse information.
+end note
+
++class Word {
+' Attributes
+  - _singleWord : string
+
+' Constructors
+  + Word(word : string, isHidden : bool)
+    ' Set "Hide" as default parameter.
+
+' Behaviors
+  + HideText()  : void
+  + ShowText()  : void
+  + IsHidden()  : bool
+  + GetRenderedText() : string
+}
+note bottom of Word
+  Keeps track of a single 
+  word and whether it is 
+  shown or hidden.
+end note
+
+Program <-- Scripture
+Program <-- Reference
+Program <-- Word
+
+@enduml
+
+/'   
+  - GetTop()
+  - SetTop(top : int)
+
+  - GetBottom()
+  - SetBottom(bottom : int)  
+'/

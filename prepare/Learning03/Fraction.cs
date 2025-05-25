@@ -4,7 +4,7 @@ public class Fraction
 {
     private int _top;
     private int _bottom;
-    // Creating Constructors
+    // Constructors
     public Fraction()
     {
         _top = 1;
@@ -20,6 +20,7 @@ public class Fraction
         _top = top;
         _bottom = bottom;
     }
+    // Methods
     public string GetFractionString()
     {
         string fractionText = $"{_top}/{_bottom}";
