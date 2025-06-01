@@ -22,28 +22,12 @@ class Program
     static void Main(string[] args)
     {
         // Welcome message
-        Console.WriteLine("Welcome to your Journal App!");
-
-        // Feed Prompt list (new object)
-        Prompt myPrompts = new Prompt();
-        myPrompts._prompts.Add("Write about someone you interacted with today!");
-        myPrompts._prompts.Add("Any challenge today to write about?");
-        myPrompts._prompts.Add("What would you have done differently today?");
-        myPrompts._prompts.Add("What was today's highlight?");
-        myPrompts._prompts.Add("What could have been a spitual esence this day?");
+        Console.WriteLine("Welcome to your Journal App!");        
         
-        // Feed Menu list
+        // Object creation
         Menu myMenu = new Menu();
-        myMenu._options.Add("1. Write");
-        myMenu._options.Add("2. Display");
-        myMenu._options.Add("3. Load");
-        myMenu._options.Add("4. Save");
-        myMenu._options.Add("5. Quit");
-
-        // Entry list ready to feed in a final format.
+        Prompt myPrompts = new Prompt();
         Entry myEntries = new Entry(); // myEntries._entries is the list name.
-
-        // Save and Load classes
         Load myLoads = new Load();
         Save mySaves = new Save();
         
@@ -60,7 +44,6 @@ class Program
             while (quit == false)
             {
                 myMenu.ShowMenu();
-                Console.Write("\nEnter the number of your choice: ");
                 string userInput = Console.ReadLine();
                 int optionNumber = int.Parse(userInput);
 
@@ -77,8 +60,8 @@ class Program
                         // Save the user input in a variable
                         userAnswer = Console.ReadLine();
                         // Generates and saves the Date of the entry
-                        DateTime theCurrentTime = DateTime.Now;
-                        string dateText = theCurrentTime.ToShortDateString();
+                        // DateTime theCurrentTime = DateTime.Now;
+                        // string dateText = theCurrentTime.ToShortDateString();
 
                         // Store IP Addresses
                         string myIp = myEntries.GetIPAddress();

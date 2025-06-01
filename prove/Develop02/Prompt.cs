@@ -2,13 +2,28 @@ using System.Collections.Generic;
 
 public class Prompt
 {
-    public List<string> _prompts = new List<string>();
-    public string _pickedPrompt;  // Tried and failed to fetch a generated prompt globally.
-    public string RandomPrompt(List<string> _prompts) // Changed from void to return _pickedPrompt
+    // Attributes
+    private List<string> _prompts = new List<string>
+    {
+        "Write about someone you interacted with today!",
+        "Any challenge today to write about?",
+        "What would you have done differently today?",
+        "What was today's highlight?",
+        "What could have been a spitual esence this day?"
+    };
+    private string _pickedPrompt; 
+
+    // Constructor
+    public Prompt()
+    {
+
+    }
+
+    //  Methods
+    public string RandomPrompt() // Changed from void to return _pickedPrompt
     {
         Random randomPrompt = new Random();
         int indexNumber = randomPrompt.Next(_prompts.Count);
-        // Added this line to save the random pick to a string variable.
         _pickedPrompt = _prompts[indexNumber];
         // Console.WriteLine(_pickedPrompt); // Not needed *******************
         return _pickedPrompt; 
