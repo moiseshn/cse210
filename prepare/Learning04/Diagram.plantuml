@@ -1,0 +1,32 @@
+@startuml Assigments
+
++class Program {
+  + Main()  : void
+}
+
++class Assignment {
+  - _studentName    : string
+  - _topic          : string
+  + Assignment(name : string, topic : string)
+  + GetStudentName() : string
+  + GetTopic()      : string
+  + GetSummary()    : string
+}
+
++class MathAssignment {
+    - _textbookSection    : string
+    - _problems     : string
+    + MathAssignment(name : string, topic : string, bookSection : string, problems : string)
+    + GetHomeworkList() : string
+}
+
++class WrittingAssignment {
+    - _title        : string
+    + WrittingAssignment(name : string, topic : string, title : string)
+    + GetWrittingInfo() : string
+}
+Program <-- Assignment
+Assignment <|-- MathAssignment
+Assignment <|-- WrittingAssignment
+
+@enduml
