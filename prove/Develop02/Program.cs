@@ -22,56 +22,45 @@ class Program
     static void Main(string[] args)
     {
         // Welcome message
-        Console.WriteLine("Welcome to your Journal App!");        
-        
-        // Object creation
-        Menu myMenu = new Menu();
-        Prompt myPrompts = new Prompt();
-        Entry myEntries = new Entry(); // myEntries._entries is the list name.
-        Load myLoads = new Load();
-        Save mySaves = new Save();
-        
+        Console.Clear();
+        Console.WriteLine("Welcome to your Journal App!");   
+
+        // Prompt myPrompts = new Prompt();
+        Entry myEntries = new Entry();
+        LoadSave myLoadSave = new LoadSave();
+
         // Global variables to be used in While Loop Menu & IF Statements
-        //int optionNumber = 1; *** Not used anymore in this scope.
-        string pickedPrompt; // Not saving generated prompt ************
+        string date;
+        string pickedPrompt;
         string userAnswer;
+        string userIp;
+        List<string> entriesList;
         
         // Display Menu recurrently based on IF statements
-        // while (optionNumber >= 1 && optionNumber <=4) *** breaks the loop if errors
         try
         {
             bool quit = false;
             while (quit == false)
             {
+                Menu myMenu = new Menu();
                 myMenu.ShowMenu();
                 string userInput = Console.ReadLine();
                 int optionNumber = int.Parse(userInput);
 
-                
-                if (optionNumber >= 1 && optionNumber <=5)
+                if (optionNumber >= 1 && optionNumber <= 5)
                 {
                     if (optionNumber == 1) // Prompt and Entry
                     {
-                        // Calls the Prompt Generator and saves the result in pickedPrompt
-                        pickedPrompt = myPrompts.RandomPrompt(myPrompts._prompts); // Changed Method to string to save it.
-                        Console.WriteLine(pickedPrompt);
-                        // Indicator for the user to write something
-                        Console.Write("> ");
-                        // Save the user input in a variable
-                        userAnswer = Console.ReadLine();
-                        // Generates and saves the Date of the entry
-                        // DateTime theCurrentTime = DateTime.Now;
-                        // string dateText = theCurrentTime.ToShortDateString();
-
-                        // Store IP Addresses
-                        string myIp = myEntries.GetIPAddress();
-                        // Stores the date, prompt and answer
-                        myEntries._entries.Add($"Date: {dateText}, Prompt: {pickedPrompt}, Entry: {userAnswer}, IP Address: {myIp}");
+                        date = myEntries.GetDate();           // Generates and saves the Date of the entry
+                        pickedPrompt = myEntries.GetPrompt(); // Calls the Prompt Generator and saves the result
+                        userAnswer = myEntries.GetEntry();    // Save the user input in a variable
+                        userIp = myEntries.GetIPAddress();    // Stores the IP Addresses
+                        myEntries.EntryToList(date, pickedPrompt, userAnswer, userIp);  // Stores the date, prompt and answer
                     }
                     else if (optionNumber == 2) // Display
                     {
                         Console.WriteLine($"\nYour entries are: ");
-                        myEntries.DisplayEntries();
+                        myEntries.ShowEntries();
                     }
                     else if (optionNumber == 3) // Load
                     {
@@ -79,18 +68,22 @@ class Program
                         Console.WriteLine("\nType your filename to load: ");
                         string userFileToLoad = Console.ReadLine();
                         // Saves the filename to a variable to pass it as a parameter.
-                        List<string> pastEntries = myLoads.ReadFromFile(userFileToLoad);
-                        // Display the entries of the loaded file
-                        Console.WriteLine(pastEntries);
+                        myLoadSave.ReadFromFile(userFileToLoad);
                     }
                     else if (optionNumber == 4) // Save
                     {
+                        entriesList = myEntries._entriesList;
+                        // entriesList = new List<string>();
+                        // entriesList = myEntries.EntryToList();
+                        // Console.WriteLine(entriesList);
+
                         // Asks the user to type the name of the file to be saved with.
                         Console.WriteLine("\nType the filename to save: ");
                         // Saves the filename to a variable to pass it as a parameter.
-                        string userFileToSave = Console.ReadLine();
+                        string filename = Console.ReadLine();
+
                         // Calls the method with two parameters: filename, entries.
-                        mySaves.SaveToFile(userFileToSave, myEntries._entries);
+                        myLoadSave.SaveToFile(filename,entriesList);
                     }
                     else
                     {

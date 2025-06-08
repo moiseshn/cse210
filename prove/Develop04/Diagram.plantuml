@@ -1,0 +1,107 @@
+@startuml Mindfulness
+
++class Program {
+  + Main()  : void
+}
++class Menu {
+  + ShowMenu() : void
+}
++class Activity {
+  - _activityName     : string
+  - _activityDetails  : string
+  - _activityDuration : int
+
+  + Activity()
+  
+  + GetStartingMessage() : string
+  + GetEndingMessage() : void
+  + ShowSpinner() : void
+  + ShowCountdownTimer() : void
+  + ClearSession() : void
+}
+
++class Breathing {
+' Attributes / Member variables
+  - _seconds : int
+
+' Constructors / Parameters
+  + Breathing()
+  ' {
+  '   _activityName = "Breathing";
+  '   _activityDetails = "This activity will elp you...";
+  '   _activityDuration = 40;
+  ' }
+
+' Behaviors / Methods / Functions
+  + GetBreathingSession() : void 
+  + GetCoutdown() : void
+  ' Breath In.... Breath out.....
+
+}
+note bottom of Breathing
+  Help the user pace their 
+  breathing to have a session 
+  of deep breathing for a 
+  certain amount of time. 
+  They might find more peace 
+  and less stress through the 
+  exercise.
+end note
+
++class Reflecting {
+' Attributes
+  - _sharedExperience : string
+  - _prompts : List<strings>
+  - _reflectionQuestions : List<string>
+
+' Constructors
+  + Reflecting(experience : string)
+
+' Behaviors
+  + GetRandomReflectionPrompt() : string
+  + GetRandomQuestions() : string
+  + DisplayPrompt() : string
+  + DisplayQuestion() : string
+  + GetAnswer() : string
+}
+note bottom of Reflecting
+  Guide the user to think deeply, 
+  by having them consider a certain 
+  experience when they were successful 
+  or demonstrated strength. Then, prompt 
+  them with questions to reflect more 
+  deeply about details of this experience. 
+  They might discover more depth than they 
+  previously realized.
+end note
+
++class Listing {
+' Attributes
+  - _thoughts : List<string>
+
+' Constructors
+  + Listing(thoughts : List<strings>)
+
+' Behaviors
+  + GetRandomListingPrompt() : string
+  + GetCountdown() : void
+  + GetThoughtsList() : strings
+}
+note bottom of Listing
+  Guide the user to think 
+  broadly, by helping them 
+  list as many things as 
+  they can in a certain area 
+  of strength or positivity. 
+  They might discover more 
+  breadth than they previously 
+  realized.
+end note
+
+Program <-- Activity
+Program <-- Menu
+Activity <|-- Breathing
+Activity <|-- Reflecting
+Activity <|-- Listing
+
+@enduml

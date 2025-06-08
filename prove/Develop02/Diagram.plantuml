@@ -33,6 +33,25 @@ note top of Program
         - An ELSE statement shows an error if none of the established's numbers is entered.
 end note
 
+
++class Menu {
+  + _options    : List<string>
+  + ShowMenu()  : void
+}
+note bottom of Menu
+  Uses a <b>List<></b> of options in the 
+  Journal App. In <b>Main()</b> we add the 
+  options with the <b>.Add</b> method:
+  1. Write
+  2. Display
+  3. Load
+  4. Save
+  5. Quit
+  
+  The method runs a <b>foreach()</b> loop 
+  to display the content of the list.
+end note
+
 +class Prompt {
   + _prompts        : List<string>
   + _pickedPrompt   : string
@@ -56,26 +75,9 @@ note bottom of Prompt
   from the list and writes it to the Console.
 end note
 
-+class Menu {
-  + _options    : List<string>
-  + ShowMenu()  : void
-}
-note bottom of Menu
-  Uses a <b>List<></b> of options in the 
-  Journal App. In <b>Main()</b> we add the 
-  options with the <b>.Add</b> method:
-  1. Write
-  2. Display
-  3. Load
-  4. Save
-  5. Quit
-  
-  The method runs a <b>foreach()</b> loop 
-  to display the content of the list.
-end note
-
 +class Entry {
   + _entries          : List<string>
+  + _date             : string
   + DisplayEntries()  : void
 }
 note bottom of Entry
@@ -112,8 +114,8 @@ note bottom of Save
   is used to iterate the entries for the output.
 end note
 
-Program <-- Prompt
 Program <-- Menu
+Program <-- Prompt
 Program <-- Entry
 Program <-- Save
 Program <-- Load

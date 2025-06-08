@@ -3,7 +3,7 @@ using System.Collections.Generic;
 public class Prompt
 {
     // Attributes
-    private List<string> _prompts = new List<string>
+    public List<string> _prompts = new List<string>
     {
         "Write about someone you interacted with today!",
         "Any challenge today to write about?",
@@ -11,7 +11,7 @@ public class Prompt
         "What was today's highlight?",
         "What could have been a spitual esence this day?"
     };
-    private string _pickedPrompt; 
+    public string _pickedPrompt; 
 
     // Constructor
     public Prompt()

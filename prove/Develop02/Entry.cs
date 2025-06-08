@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using System.Net;
 public class Entry
 {
-    // public List<string> _entries = new List<string>();
-    private string _entries;
-    private string _prompts;
-    private string _dates;
+    public List<string> _entriesList = new List<string>();
+    public string _entry;
+    public string _prompt;
+    public string _date;
+    public string _localIp;
 
     //  Constructors
     public Entry()
@@ -14,47 +15,61 @@ public class Entry
     }
 
     // Methods
+    public string GetDate()
+    {
+        DateTime theCurrentTime = DateTime.Now;
+        string _date = theCurrentTime.ToShortDateString();
+        return _date;
+    }
     public string GetPrompt()
     {
         Prompt myPrompt = new Prompt();
-        string pickedPrompt = myPrompt.RandomPrompt();
-        Console.WriteLine(pickedPrompt); // It's needed to print it ????????????
-        return pickedPrompt;
+        string _prompt = myPrompt.RandomPrompt();
+        Console.WriteLine(_prompt);
+        return _prompt;
     }
-        public string GetEntry()
+    public string GetEntry()
     {
-        _entries = Console.ReadLine();
-        return _entries;
+        Console.Write("> ");
+        _entry = Console.ReadLine();
+        return _entry;
     }
-        public string GetDate()
-    {
-        DateTime theCurrentTime = DateTime.Now;
-        string _dates = theCurrentTime.ToShortDateString();
-        return _dates;
-    }
-    public string DisplayEntries()
-    {
-        // foreach (string i in _entries)
-        // {
-        //     Console.WriteLine(i);
-        // }
-        string completeRegistry = ($"Date: {_dates} - {_prompts} {_entries}");
-        return completeRegistry;
-    }
-
     public string GetIPAddress()
     {
         IPHostEntry host;
-        string localIp = "?";
+        string _localIp = "?";
         host = Dns.GetHostEntry(Dns.GetHostName());
         foreach (IPAddress ip in host.AddressList)
         {
             if (ip.AddressFamily.ToString() == "InterNetwork")
             {
-                localIp = ip.ToString();
+                _localIp = ip.ToString();
                 // Console.WriteLine(localIp);
             }
         }
-        return localIp;
+        return _localIp;
+    }
+    public List<string> EntryToList(string date, string prompt, string entry, string localIp)
+    {
+        _date = date;
+        _prompt = prompt;
+        _entry = entry;
+        _localIp = localIp;
+        _entriesList.Add($"{date}~{prompt}~{entry}~{localIp}");
+        // return $"Date: {date} - {prompt} {entry}";
+        return _entriesList;
+    }
+    public void ShowEntries()
+    {
+        foreach (string i in _entriesList)
+        {
+            string[] parts = i.Split("~");
+            string date = parts[0];
+            string prompt = parts[1];
+            string entry = parts[2];
+            string localIp = parts[3];
+
+            Console.WriteLine($"Date: {date}, Prompt: {prompt}, Entry: {entry}, Local IP: {localIp}");
+        }
     }
 }
