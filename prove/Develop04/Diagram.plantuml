@@ -7,36 +7,36 @@
   + ShowMenu() : void
 }
 +class Activity {
-  - _activityName     : string
-  - _activityDetails  : string
-  - _activityDuration : int
+' Attributes
+  # _activityName     : string
+  # _activityDetails  : string
+  # _activityDuration : int
+  - _spinnerDuration  : int
 
+' Constructors
   + Activity()
   
-  + GetStartingMessage() : string
-  + GetEndingMessage() : void
-  + ShowSpinner() : void
-  + ShowCountdownTimer() : void
-  + ClearSession() : void
+' Behaviors
+  + GetActivityDuration() : int
+  + GetStartingMessage()  : void
+  + GetEndingMessage()    : void
+  + ShowSpinner()         : void
+  + CountdownTimer()      : void
 }
 
 +class Breathing {
-' Attributes / Member variables
-  - _seconds : int
+' Attributes
+  - _breatheInSecs    : int
+  - _breatheHoldSecs  : int
+  - _breatheOutSecs   : int
+  - _spinnerDuration  : int
 
-' Constructors / Parameters
+' Constructors
   + Breathing()
-  ' {
-  '   _activityName = "Breathing";
-  '   _activityDetails = "This activity will elp you...";
-  '   _activityDuration = 40;
-  ' }
 
-' Behaviors / Methods / Functions
-  + GetBreathingSession() : void 
-  + GetCoutdown() : void
-  ' Breath In.... Breath out.....
-
+' Behaviors
+  + GetBreathingSession()   : void 
+  - GetBreathingCountdown() : void
 }
 note bottom of Breathing
   Help the user pace their 
@@ -50,19 +50,18 @@ end note
 
 +class Reflecting {
 ' Attributes
-  - _sharedExperience : string
-  - _prompts : List<strings>
-  - _reflectionQuestions : List<string>
+  - _prompts              : List<strings>
+  - _pickedPrompt         : string
+  - _reflectingQuestions  : List<string>
+  - _spinnerDuration      : int
 
 ' Constructors
-  + Reflecting(experience : string)
+  + Reflecting()
 
 ' Behaviors
-  + GetRandomReflectionPrompt() : string
-  + GetRandomQuestions() : string
-  + DisplayPrompt() : string
-  + DisplayQuestion() : string
-  + GetAnswer() : string
+  + GetReflectingSession()  : void
+  - GetRandomPrompt()       : void
+  - GetRandomQuestion()     : void
 }
 note bottom of Reflecting
   Guide the user to think deeply, 
@@ -77,15 +76,17 @@ end note
 
 +class Listing {
 ' Attributes
-  - _thoughts : List<string>
+  - _prompts          : List<string>
+  - _pickedPrompt     : string
+  - _spinnerDuration  : int
 
 ' Constructors
-  + Listing(thoughts : List<strings>)
+  + Listing()
 
 ' Behaviors
-  + GetRandomListingPrompt() : string
-  + GetCountdown() : void
-  + GetThoughtsList() : strings
+  + GetListingSession() : void
+  - GetRandomPrompt()   : void
+  - GetAnswers()        : void
 }
 note bottom of Listing
   Guide the user to think 
@@ -98,8 +99,8 @@ note bottom of Listing
   realized.
 end note
 
-Program <-- Activity
 Program <-- Menu
+Program <-- Activity
 Activity <|-- Breathing
 Activity <|-- Reflecting
 Activity <|-- Listing

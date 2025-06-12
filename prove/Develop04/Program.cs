@@ -18,23 +18,29 @@ class Program
                 {
                     if (userChoice == 1) // Breathing
                     {
-                        Console.Clear();
-                        Console.WriteLine("Here goes Breathing....");
+                        Breathing breathing = new Breathing();
+                        breathing.GetStartingMessage();
+                        breathing.GetBreathingSession();
+                        breathing.GetEndingMessage();
                     }
                     else if (userChoice == 2) // Reflecting
                     {
-                        Console.Clear();
-                        Console.WriteLine("Here goes Reflecting....");
+                        Reflecting reflecting = new Reflecting();
+                        reflecting.GetStartingMessage();
+                        reflecting.GetReflectingSession();
+                        reflecting.GetEndingMessage();
                     }
                     else if (userChoice == 3) // Listing
                     {
-                        Console.Clear();
-                        Console.WriteLine("Here goes Listing....");
+                        Listing listing = new Listing();
+                        listing.GetStartingMessage();
+                        listing.GetListingSession();
+                        listing.GetEndingMessage();
                     }
                     else // Quit
                     {
                         Console.Clear();
-                        Console.WriteLine("Bye....");
+                        Console.WriteLine("\nBye....\n");
                         quit = true;
                     }
                 }
