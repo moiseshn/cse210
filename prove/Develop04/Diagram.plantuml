@@ -11,7 +11,7 @@
   # _activityName     : string
   # _activityDetails  : string
   # _activityDuration : int
-  - _spinnerDuration  : int
+  # _spinnerDuration  : int
 
 ' Constructors
   + Activity()
@@ -29,7 +29,6 @@
   - _breatheInSecs    : int
   - _breatheHoldSecs  : int
   - _breatheOutSecs   : int
-  - _spinnerDuration  : int
 
 ' Constructors
   + Breathing()
@@ -53,7 +52,6 @@ end note
   - _prompts              : List<strings>
   - _pickedPrompt         : string
   - _reflectingQuestions  : List<string>
-  - _spinnerDuration      : int
 
 ' Constructors
   + Reflecting()
@@ -78,7 +76,6 @@ end note
 ' Attributes
   - _prompts          : List<string>
   - _pickedPrompt     : string
-  - _spinnerDuration  : int
 
 ' Constructors
   + Listing()

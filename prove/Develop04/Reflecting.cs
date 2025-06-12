@@ -20,7 +20,6 @@ public class Reflecting : Activity
         "What did you learn about yourself through this experience?",
         "How can you keep this experience in mind in the future?"
     ];
-    private int _spinnerDuration = 5;
 
     // Constructors
     public Reflecting() : base()

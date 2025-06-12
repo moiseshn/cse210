@@ -5,7 +5,7 @@ public class Activity
     protected string _activityName;
     protected string _activityDetails;
     protected int _activityDuration;
-    private int _spinnerDuration = 5;
+    protected int _spinnerDuration = 5;
 
     // Constructors
     public Activity()

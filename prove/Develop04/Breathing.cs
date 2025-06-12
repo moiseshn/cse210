@@ -5,7 +5,7 @@ public class Breathing : Activity
     private int _breatheInSecs = 4;
     private int _breatheHoldSecs = 6;
     private int _breatheOutSecs = 8;
-    private int _spinnerDuration = 5;
+    
     // Constructors
     public Breathing() : base()
     {

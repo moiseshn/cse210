@@ -10,7 +10,6 @@ public class Listing : Activity
         "Who are some of your personal heroes?"
     ];
     private string _pickedPrompt;
-    private int _spinnerDuration = 5;
 
     // Constructors
     public Listing() : base()
@@ -48,10 +47,11 @@ public class Listing : Activity
         int i = 0;
         while (DateTime.Now < endTime)
         {
-            // ADD ITERATION TO COUNT EVENTS AND STORE THEM AS COUNT
             Console.Write("> ");
             Console.ReadLine();
+            i++;
         }
-        Console.WriteLine($"\nYou listed {i} items");
+        Console.Write($"\nYou listed {i} items. ");
+        ShowSpinner(_spinnerDuration);
     }
 }
