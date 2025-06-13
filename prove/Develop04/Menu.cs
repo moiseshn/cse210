@@ -11,5 +11,6 @@ public class Menu
         Console.WriteLine("3. Start listing activity");
         Console.WriteLine("4. Quit");
         Console.Write("\nSelect a choice from the menu: ");
+        Console.CursorVisible = true;
     }
 }

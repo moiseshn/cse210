@@ -25,11 +25,12 @@ public class Activity
         Console.WriteLine($"{_activityDetails}\n");
         Console.Write($"How long, in seconds, would you like for your session? ");
         _activityDuration = int.Parse(Console.ReadLine());
+        Console.CursorVisible = true;
     }
     public void GetEndingMessage()
     {
         Console.Clear();
-        Console.WriteLine("Well done!!\n");
+        Console.WriteLine("Well done!!");
         ShowSpinner(_spinnerDuration);
         Console.WriteLine($"You have completed another {_activityDuration} seconds of the {_activityName} Activity.");
         ShowSpinner(_spinnerDuration);
@@ -64,6 +65,7 @@ public class Activity
             {
                 i = 0;
             }
+            Console.CursorVisible = false;
         }
     }
     public void CountdownTimer(int duration)
@@ -73,6 +75,7 @@ public class Activity
             Console.Write(i);
             Thread.Sleep(1000);
             Console.Write("\b \b");
+            Console.CursorVisible = false;
         }
     }
 }

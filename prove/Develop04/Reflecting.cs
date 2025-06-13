@@ -58,7 +58,7 @@ public class Reflecting : Activity
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(_activityDuration);
 
-        while (DateTime.Now < endTime)          // ACTIVITY DURATION NOT BREAKING THE WHILE LOOP
+        while (DateTime.Now < endTime)
         {
             Random randomQuestion = new Random();
             int indexNumber = randomQuestion.Next(_reflectingQuestions.Count);
