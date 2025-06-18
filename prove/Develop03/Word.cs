@@ -9,6 +9,7 @@ public class Word
     private string _text;
     private string _isHiddenWord;
     private List<int> _hiddenIndex;
+    private int _numberOfWordsToHide = 3;
 
     // Constructors
     // This constructor should likely accept the text of the word to save it as an attribute. 
@@ -28,18 +29,29 @@ public class Word
 
     // Methods
     // has the responsibility for storing the text of a word and whether it is hidden or not.
-    public void HideWord()
+    public List<string> HideWord(string text, int numberOfWordsToHide)
     {
-        var random = new Random();
-        var index = random.Next(_wordList.Length);
-        if (_hiddenIndex.Contains(index))
+        _text = text;
+        _numberOfWordsToHide = numberOfWordsToHide;
+
+        List<string> words = text.Split(" ").ToList();
+        Random random = new Random();
+        for (int i = 0; i < numberOfWordsToHide; i++)
         {
-            HideWord();
+            int index = random.Next(words.Count);
+            words[index] = new string('_', words[index].Length);
         }
-        else
-        {
-            _hiddenIndex.Add(index);
-        }
+        // var random = new Random();
+        // var index = random.Next(_wordList.Length);
+        // if (_hiddenIndex.Contains(index))
+        // {
+        //     HideWord();
+        // }
+        // else
+        // {
+        //     _hiddenIndex.Add(index);
+        // }
+        return words;
     }
     public void ShowWord(string text)
     {

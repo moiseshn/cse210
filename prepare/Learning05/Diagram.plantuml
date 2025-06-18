@@ -1,0 +1,32 @@
+@startuml Shapes
+
++class Program {
+  + Main()  : void
+}
++class Shape {
+  - _color          : string
+  + Shape(string)
+  
+  + GetColor()      : string
+  + SetColor(string) : void
+  + GetArea()       : double
+}
++class Square {
+    - _side     : double
+    + GetArea() : double
+}
++class Rectangle {
+    - _lenght   : double
+    - _width    : double
+    + GetArea() : double
+}
++class Circle {
+    - _radius   : double
+    + GetArea() : double
+}
+Program <-- Shape
+Shape <|-- Square
+Shape <|-- Rectangle
+Shape <|-- Circle
+
+@enduml

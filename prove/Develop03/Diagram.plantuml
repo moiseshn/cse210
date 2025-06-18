@@ -9,8 +9,7 @@
   - _reference  : string
   - _text      : string
 
-' Constructors / Parameters
-  + Scripture(reference : string, text : string)
+' Constructors / Parameters  + Scripture(reference : string, text : string)
     ' split text to list
 
 ' Behaviors / Methods / Functions

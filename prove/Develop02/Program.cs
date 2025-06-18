@@ -180,4 +180,10 @@ Here are some ideas you might consider:
     or format such as JSON for storage.
 - Report on what you have done to exceed requirements by adding a 
     description of it in a comment in the Program.cs file.
+
+FEEDBACK #3
+Moises, it works the same for me. It writes the entries to a file. When I load the entries, 
+it reads them from a file. But, if I then tell the program to display my entries, it doesn't 
+show anything because the data from the file wasn't added to the program's list of entries.
+
 */
