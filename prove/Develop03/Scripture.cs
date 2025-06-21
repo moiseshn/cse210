@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography.X509Certificates;
+using System.Linq;
 
 // Keeps track of the reference and the text of the scripture. 
 // Can hide words and get the rendered display of the text.
@@ -8,8 +10,9 @@ public class Scripture
 {
     // Attributes
     // member variables for a reference and all of the words in the scripture.
-    private string _reference;
-    private string _text;
+    public Reference _reference;
+    private List<Word> _words;
+    // private int _wordIndex = 0;
 
     // Constructors
     // will need a constructor that accepts both a reference and the text of the scripture. 
@@ -19,26 +22,61 @@ public class Scripture
     // string with all of the words in it. Then, the constructor would have the responsibility 
     // of creating the list, and splitting up the words in the string to create Word objects 
     // for each one and put them in the list.
-    public Scripture(string reference, string text)
+    public Scripture(Reference reference, string text)
     {
         _reference = reference;
-        _text = text;
-        // List<string> wordList = text.Split(" ").ToList();
-        List<Word> wordList = new List<Word>(); // calls the Word class's behavior to split, toList.
+        _words = text.Split(' ').Select(word => new Word(word)).ToList();
 
-        foreach (Word word in wordList)
-        {
-            word.HideWord();
-            word.ShowWord(_text);
-            word.IsHidden();
+        // List<Word> wordList = new List<Word>(); // calls the Word class's behavior to split, toList.
+        // string[] wordList = text.Split(" ");
+        // foreach (var word in wordList)
+        // {
+        //     _words.Add(new Word(word));
+            // word.HideWord();
+            // word.ShowWord(_words);
+            // word.IsHidden();
             // Console.WriteLine(word.GetRenderedText());
-        }
+        // }
     }
 
     // Methods
     // has the responsibility to keep track of the reference, the text, and to hide the words.
-    public string GetRenderedScripture()
+    public void HideRandom(int numberOfWordsToHide)
     {
+        var visibleWords = _words.Where(word => !word.IsHiddenWord()).ToList();
+        if (visibleWords.Count <= numberOfWordsToHide)
+        {
+            foreach (var word in visibleWords)
+            {
+                word.HideWord();
+            }
+        }
+        else
+        {
+            Random random = new Random();
+            for (int i = 0; i < numberOfWordsToHide; i++)
+            {
+                int randomizedIndices = random.Next(visibleWords.Count);
+                visibleWords[randomizedIndices].HideWord();
+                visibleWords.RemoveAt(randomizedIndices);
+            }
+        }
+        // if (_wordIndex < _words.Count)
+        // {
+        //     List<int> hiddenIndexes = _words
+        //     .Select((word, index) => new { Word = word, Index = index })
+        //     .Where(item => !item.Word._isHiddenWord)
+        //     .Select(item => item.Index)
+        //     .ToList();
+
+        //     if (hiddenIndexes.Count > 0)
+        //     {
+        //         Random random = new Random();
+        //         int randomizedIndices = random.Next(0, hiddenIndexes.Count);
+        //         _words[hiddenIndexes[randomizedIndices]].HideWord();
+        //         _wordIndex++;
+        //     }
+        // }
         /*
                 // split text to list
                 List<string> wordList = _text.Split(" ").ToList();
@@ -64,19 +102,28 @@ public class Scripture
 
                     doThisMany += Random.Shared.Next(1, wordList.Count - doThisMany);
                 }
+            return String.Concat(wordList);  // This joins into a single string a list of words.
         */
-
-        return $"{_reference} {_text}";
-        // return String.Concat(wordList);  // This joins into a single string a list of words.
     }
-    public string HideWords()
+    public string GetRenderedScripture()
     {
-        string x = "";
-        return x;
+        string renderedScripture = $"{_reference.GetReferenceText()}";
+        renderedScripture += string.Join(" ", _words.Select(word => word.GetRenderedText()));
+        return renderedScripture;
+        // This joins into a single string a list of words.
+        // List<string> showWords = _words.ConvertAll(word => word.ToString());
+        // string renderedScripture = string.Join(" ", showWords);
+        // string renderedReference = _reference.GetReferenceText();
+        // return $"{renderedReference}| {renderedScripture}";
     }
+    // public string HideWords()
+    // {
+    //     string x = "";
+    //     return x;
+    // }
     public bool IsAllHidden()
     {
-        return true;
+        return _words.All(word => word.IsHiddenWord());
     }
 }
 

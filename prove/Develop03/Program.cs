@@ -4,30 +4,77 @@ class Program
 {
     static void Main(string[] args)
     {
-        bool quit = false;
-        string userInput;
         // Extra: Load file, select reference from list, add "menu" option.
-        do
+        Console.Clear();
+        Reference r1 = new Reference("John", 3, 16);
+        string t1 = "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.";
+        Scripture scripture = new Scripture(r1, t1);
+
+        while (!scripture.IsAllHidden())
         {
-            Reference r1 = new Reference("John", 3, 16);
-            string ref1 = r1.GetReferenceText();
+            Console.Clear();
+            Console.WriteLine(scripture.GetRenderedScripture());
+            Console.WriteLine("\nPress \"Enter\" to continue or type \"quit\" to finish: ");
+            string userInput = Console.ReadLine();
 
-            string text1 = "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.";
+            if (userInput.ToLower() == "quit")
+            {
+                break;
+            }
 
-            Word w1 = new Word(text1);
-            string wordList = w1.GetRenderedText();
-            w1.ShowWord(text1);
-            
-            Scripture s1 = new Scripture(ref1, text1);
-            Console.WriteLine(s1.GetRenderedScripture());
+            scripture.HideRandom(2);
+
+            // if (scripture != null)
+            // {
+            //     bool memorized = false;
+
+            //     while (!scripture.IsAllHidden())
+            //     {
+            //         Console.Clear();
+            // Console.WriteLine(scripture.GetRenderedScripture());
+            // Console.WriteLine("\nPress \"Enter\" to continue or type \"quit\" to finish: ");
+            // string userInput = Console.ReadLine();
+
+            // if (userInput.ToLower() == "quit")
+            // {
+            //     return;
+            // }
+            //     else if (scripture.IsAllHidden())
+            //     {
+            //         memorized = true;
+            //         break;
+            //     }
+            //     else
+            //     {
+            //         scripture.HideRandom(2);
+            //     }
+            // }
+            // if (allHidden)
+            // {
+            //     Console.Clear();
+            //     Console.WriteLine("\nPress \"Enter\" to continue or type \"quit\" to finish: ");
+            //     Console.ReadLine();
+            // }
+            // }
+            // else
+            // {
+            //     Console.WriteLine("\nPress \"Enter\" to continue or type \"quit\" to finish: ");
+            //     Console.ReadLine();
+            //     return;
+            // }
+            // Word w1 = new Word(text1);
+            // string wordList = w1.GetRenderedText();
+            // w1.ShowWord(text1);
+
+            // Scripture s1 = new Scripture(ref1, text1);
+            // Console.WriteLine(s1.GetRenderedScripture());
 
             // bool isHidden = true;
 
-            Console.WriteLine("\nPress \"Enter\" to continue or type \"quit\" to finish: ");
-            userInput = Console.ReadLine();
-            
-            quit = false;
-        } while (!(quit == false || userInput == "quit"));
+            // quit = false;
+        }
+
+        Console.Clear();
     }
 }
 

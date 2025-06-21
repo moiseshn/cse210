@@ -1,0 +1,90 @@
+@startuml Eternal Quest
+
++class Program {
+  + Main()  : void
+}
++class Menu {
+  + ShowMenu() : void
+  + ShowGoalsMenu() : void
+}
++class SaveLoad {
+  - _userfilename : string
+  + SaveLoad()
+
+  + SaveToFile() : void
+  + LoadFromFile() : void
+}
++class Goal {
+' Attributes
+  # _goalName     : string
+  # _goalDetails  : string
+  # _goalPoints     : int
+  # _goalCompleted    : bool
+  # _goalList   : List<string>
+
+' Constructors
+  + Goal()
+  
+' Behaviors
+  + GetEvent()  : void
+  + GetPoints()  : int
+  + RecordEvent() : void
+  + DisplayScore() : void
+  + DisplayGoals() : void
+}
+
++class SimpleGoal {
+' Attributes
+
+
+' Constructors
+  + SimpleGoal()
+
+' Behaviors
+  + GetEvent()  : void
+  + GetPoints()  : int
+}
+note bottom of SimpleGoal
+  Help the user 
+end note
+
++class EternalGoal {
+' Attributes
+
+' Constructors
+  + EternalGoal()
+
+' Behaviors
+  + GetEvent()  : void
+  + GetPoints()  : int
+}
+note bottom of EternalGoal
+  Guide the user 
+end note
+
++class ChecklistlGoal {
+' Attributes
+  - _countTask  : int
+  - _totalTasks : int
+  - _bonusPoints : int
+
+' Constructors
+  + ChecklistlGoal()
+
+' Behaviors
+  + GetEvent()  : void
+  + GetPoints()  : int
+  + DisplayTaskComplete() : void
+}
+note bottom of ChecklistlGoal
+  Guide the user
+end note
+
+Program <-- Menu
+Program <-- SaveLoad
+Program <-- Goal
+Goal <|-- SimpleGoal
+Goal <|-- EternalGoal
+Goal <|-- ChecklistlGoal
+
+@enduml

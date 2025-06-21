@@ -9,9 +9,11 @@ public class Entry
     public string _localIp;
 
     //  Constructors
-    public Entry()
+    public Entry(string prompt, string entry)
     {
-
+        _prompt = prompt;
+        _entry = entry;
+        _date = GetDate();
     }
 
     // Methods
