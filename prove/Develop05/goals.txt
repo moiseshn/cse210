@@ -1,0 +1,4 @@
+126
+SimpleGoal:Homework,Complete it on time,10,True
+EternalGoal:Pray,Every morning and night,10
+ChecklistGoal:Gym,10 pushups each day,3,100,2,2

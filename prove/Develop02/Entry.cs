@@ -9,6 +9,8 @@ public class Entry
     public string _localIp;
 
     //  Constructors
+    public Entry()
+    {}
     public Entry(string prompt, string entry)
     {
         _prompt = prompt;
@@ -71,7 +73,7 @@ public class Entry
             string entry = parts[2];
             string localIp = parts[3];
 
-            Console.WriteLine($"Date: {date}, Prompt: {prompt}, Entry: {entry}, Local IP: {localIp}");
+            Console.WriteLine($"Date: {date}, \nPrompt: {prompt}, \nEntry: {entry}, \nLocal IP: {localIp}");
         }
     }
 }

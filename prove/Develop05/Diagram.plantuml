@@ -2,9 +2,11 @@
 
 +class Program {
   + Main()  : void
+  + _goalList   : List<string>
+
 }
 +class Menu {
-  + ShowMenu() : void
+  + ShowMainMenu() : void
   + ShowGoalsMenu() : void
 }
 +class SaveLoad {
@@ -20,13 +22,12 @@
   # _goalDetails  : string
   # _goalPoints     : int
   # _goalCompleted    : bool
-  # _goalList   : List<string>
 
 ' Constructors
   + Goal()
   
 ' Behaviors
-  + GetEvent()  : void
+  + GetGoal()  : void
   + GetPoints()  : int
   + RecordEvent() : void
   + DisplayScore() : void
