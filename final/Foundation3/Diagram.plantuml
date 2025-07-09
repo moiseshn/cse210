@@ -1,0 +1,88 @@
+@startuml Event Planning
+' Inheritance
++class Program {
+  + Main()  : void
+}
++class Address {
+  - _street : string
+  - _city : string
+  - _state : string
+  - _country : string
+
+  + Address()
+
+  + DisplayAddress() : void
+}
++class Event {
+' Attributes
+  # _title : string
+  # _description : string
+  # _date : string
+  # _time : string
+
+' Constructors
+  + Event()
+  
+' Behaviors
+  ' + RecordEvent() : void
+  + DisplayStandardText() : string
+  + DisplayFullText() : string
+  + DisplayShortText() : string
+}
+
++class LectureEvent {
+' Attributes
+  - _speaker : string
+  - _capacity : int
+
+' Constructors
+  + LectureEvent()
+
+' Behaviors
+  + LectureMessage()  : void
+
+}
+note bottom of LectureEvent
+  Uses the capacity attribute
+  to add it in the message.
+end note
+
++class ReceptionEvent {
+' Attributes
+  - _rsvpEmail : string
+
+' Constructors
+  + ReceptionEvent()
+
+' Behaviors
+  + ReceptionMessage()  : void
+
+}
+note bottom of ReceptionEvent
+  Add the email in the
+  customized message.
+end note
+
++class OutdoorEvent {
+' Attributes
+  - _weatherCondition  : string
+
+' Constructors
+  + OutdoorEvent()
+
+' Behaviors
+  + WeatherMessage() : void
+
+}
+note bottom of OutdoorEvent
+  Adds a specified weather 
+  condition as string.
+end note
+
+Program <-- Address
+Program <-- Event
+Event <|-- LectureEvent
+Event <|-- ReceptionEvent
+Event <|-- OutdoorEvent
+
+@enduml

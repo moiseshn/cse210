@@ -1,0 +1,84 @@
+@startuml Online Ordering
+' Encapsulation
++class Program {
+  + Main()  : void
+}
++class Product {
+  - _productId : int
+  - _productName : string
+  - _productPrice : float
+  - _productQty : int
+
+  + Product()
+
+  + GetProductTotal() : float
+}
+note bottom of Product
+  The method multiplies
+  quantity * price.
+end note
+
++class Order {
+' Attributes
+  - _productList  : List<string>
+  - _customerList : List<string>
+
+' Constructors
+  + Order()
+
+' Behaviors
+  + GetOrderTotal()  : float
+  + GetShippingCost() : float
+  + GetPackingLabel() : string
+  + GetShippingLabel() : void
+}
+note bottom of Order
+  Add $5 of shipping cost 
+  if it's in USA, else charge
+  $35 as one-time fee per order.
+end note
+
++class Customer {
+' Attributes
+  - _customerName : string
+  - _customerAddress : Address
+
+' Constructors
+  + Customer()
+
+' Behaviors
+  + GetUsa() : bool
+}
+note bottom of Customer
+  This method should call 
+  a method on the address 
+  to find if is true.
+end note
+
++class Address {
+' Attributes
+  - _street : string
+  - _city : string
+  - _state : string
+  - _country : string
+
+' Constructors
+  + Address()
+
+' Behaviors
+  + IsUsa()  : bool
+  + DisplayAddress()  : string
+}
+note bottom of Address
+  This returns all of its 
+  fields together in one 
+  string with newline 
+  characters where needed.
+end note
+
+Program <-- Product
+Program <-- Order
+Program <-- Customer
+Program <-- Address
+
+@enduml

@@ -1,0 +1,48 @@
+@startuml YouTube Videos
+' Abstraction
++class Program {
+  + Main()  : void
+}
+
++class Video {
+' Attributes
+  - _title  : string
+  - _author : string
+  - _length : int
+  '- _comment : List<Comment>
+
+' Constructors
+  + Video()
+
+' Behaviors
+  + GetCommentCount() : int
+  + DisplayVideoInfo() : string
+}
+note bottom of Video
+  Length is stored in seconds.
+  A method gets the count, and
+  the other displays the video
+  information.
+end note
+
++class Comment {
+' Attributes
+  - _userName : string
+  - _userText : string
+
+' Constructors
+  + Comment()
+
+' Behaviors
+  + GetComment  () : void
+}
+note bottom of Comment
+  The method displays a
+  list of comments of a
+  video.
+end note
+
+Program <-- Video
+Program <-- Comment
+
+@enduml

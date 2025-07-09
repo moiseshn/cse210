@@ -9,7 +9,7 @@ class Program
     {
         /*
         ***** PENDING ********
-        - Load from file for each goal format and score.
+        - Load from file data correctly.
         - Number list from 1 in Record Events
         - Number list in List Goals (iteration inside over an iteratition)
         */
@@ -140,7 +140,6 @@ class Program
 
                     using (StreamReader reader = new StreamReader(filename))
                     {
-                        // int score = 0;
                         // int score = int.Parse(File.ReadLines(filename).First());
                         int score = int.Parse(reader.ReadLine());
                         string line;

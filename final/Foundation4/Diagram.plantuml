@@ -1,0 +1,72 @@
+@startuml Exercise Tracking
+' Polymorphism
++class Program {
+  + Main()  : void
+}
+
++class Activity {
+' Attributes
+  # _date : string
+  # _duration : int
+
+' Constructors
+  + Activity()
+  
+' Behaviors
+  + GetDistance()  : float
+  + GetSpeed()  : float
+  + GetPace() : float
+  + GetSummary() : string
+}
+
++class Running {
+' Attributes
+
+' Constructors
+  + Running()
+
+' Behaviors
+  ' + TrackExercise()  : void
+
+}
+note bottom of Running
+  It uses override for
+  running calculations.
+end note
+
++class Biking {
+' Attributes
+
+' Constructors
+  + Biking()
+
+' Behaviors
+  ' + GetEvent()  : void
+
+}
+note bottom of Biking
+  It uses override for
+  biking calculations.
+end note
+
++class Swimming {
+' Attributes
+  '- _poolLength  : int
+
+' Constructors
+  + Swimming()
+
+' Behaviors
+  + GetLaps()  : int
+}
+note bottom of Swimming
+  It calculates laps on
+  a 50 ft length pool.
+end note
+
+Program <-- Activity
+Activity <|-- Running
+Activity <|-- Biking
+Activity <|-- Swimming
+
+@enduml
